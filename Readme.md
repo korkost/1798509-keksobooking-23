@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
-* Студент: [Константин](https://up.htmlacademy.ru/javascript/23/user/1798509).
-* Наставник: `Неизвестно`.
+* Студент: [Константин](https://htmlacademy.ru/profile/id1798509).
+* Наставник: [Артем Рудов](https://htmlacademy.ru/profile/artrudov).
 
 ---
 
