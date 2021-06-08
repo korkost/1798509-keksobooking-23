@@ -1,13 +1,17 @@
-let showRandomNumber = function (min, max) {
-  for (let i = 0; i >= min.length; i++) {
+const getRandomInt = (from, to) => {
+  if (to <= from || from < 0) {
+    return;
   }
-  return Math.floor((Math.random() * 10) + 0);
+  return Math.floor(Math.random() * (to - from + 1)) + from;
 };
-showRandomNumber(0, 10);
+getRandomInt(0, 10);
 
-let showRandomNumber = function (min, max) {
-  for (let i = 0; i >= min.length; i++) {
+
+const getRandomArbitrary = (from, to) => {
+  if (to <= from || from < 0) {
+    return;
   }
-  return Math.random() * (max - min) + min;
-}
-showRandomNumber(0, 10);
+  const result = Math.random() * (to - from) + from;
+  return parseFloat(result.toFixed(1));
+};
+getRandomArbitrary(1, 10);
