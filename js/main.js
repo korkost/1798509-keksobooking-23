@@ -1,67 +1,66 @@
-/* eslint-disable indent */
-/* eslint-disable no-unused-vars */
 // Данные для объекта
-const offerTitle = [
-	'Большая квартира',
+const OFFER_TITLE = [
+  'Большая квартира',
 ];
-
-const offerType = ['palace', 'flat', 'house', 'bungalo', 'hotel'];
-const offerCheckIn = ['12:00', '13:00', '14:00'];
-const offerCheckOut = ['12:00', '13:00', '14:00'];
-const offerFeatures = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
-const offerPhotos = [
-	'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
-	'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
-	'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
+const avatarNumbers = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10'];
+const OFFER_TYPE = ['palace', 'flat', 'house', 'bungalo', 'hotel'];
+const TIME_INTERVAL = ['12:00', '13:00', '14:00'];
+const OFFER_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+const OFFER_PHOTOS = [
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
-
+const avatars = avatarNumbers.map((value) => `img/avatars/user${value}.png`);
 // Функция случайного числа из диапазона
 function getRandomIntegerRange(min, max) {
-	return Math.floor(Math.random() * (max - min + 1) + min);
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 //возвращаем новый массив, без повторения
-const getRandomArrayElement = (elements) => elements[_.random(0, elements.length - 1)];
+function getRandomArrayElement(arr) {
+  const lengthArray = Math.floor(Math.random() * arr.length);
+  const newArray = [];
 
-const originalArray = [getRandomArrayElement];
-const uniqueArray = Array.from(new Set(originalArray));
+  for (let min = 0; min < lengthArray; min++) {
+    newArray.push(arr[min]);
+  }
 
-// Функция генерации объекта
-function createObject(index) {
-	const objectRoom = {
-		'author': {
-			'avatar': `img/avatars/user0${index + 1}.png`,
-		},
-
-		'offer': {
-			'title': offerTitle[index],
-			'address': `${getRandomIntegerRange(35.65000, 35.70000)}, ${getRandomIntegerRange(139.70000, 139.80000)}`,
-			'price': getRandomIntegerRange(1000, 1000000),
-			'type': offerType[getRandomIntegerRange(0, offerType.length - 1)],
-			'rooms': getRandomIntegerRange(1, 100),
-			'guests': getRandomIntegerRange(1, 100),
-			'checkin': offerCheckIn[getRandomIntegerRange(0, offerCheckIn.length - 1)],
-			'checkout': offerCheckOut[getRandomIntegerRange(0, offerCheckOut.length - 1)],
-			// Случайное кол-во, случаные значения, не должны повторяться
-			'features': getRandomArrayElement(offerFeatures),
-			'description': '',
-			// Случ. порядок
-			'photos': getRandomArrayElement(offerPhotos),
-		},
-
-		'location': {
-			'lat': getRandomIntegerRange(35.65000, 35.70000),
-			'lng': getRandomIntegerRange(139.70000, 139.80000),
-		},
-	};
-
-	return objectRoom;
+  return newArray;
 }
 
-function createListOffers(quantityElements) {
-	const listElement = [];
-	// eslint-disable-next-line id-length
-	for (let i = 0; i < quantityElements; i++) {
-		listElement[i] = createObject(i);
-	}
-	return listElement;
-}
+const NUMBERS_OF_OFFERS = 10;
+
+const createAdvent = () => {
+  const locationLat = getRandomIntegerRange(35.65000, 35.70000, 5);
+  const locationLng = getRandomIntegerRange(139.70000, 139.80000, 5);
+  function getAddress() {
+    return `${locationLat}, ${locationLng}`;
+  }
+  return {
+    avatar: getRandomArrayElement(avatars),
+    author: {
+      avatar: getRandomArrayElement(avatars),
+    },
+    offer: {
+      title: OFFER_TITLE,
+      address: getAddress,
+      price: getRandomIntegerRange(1000, 1000000),
+      type: OFFER_TYPE[getRandomIntegerRange(0, OFFER_TYPE.length - 1)],
+      rooms: getRandomIntegerRange(1, 100),
+      guests: getRandomIntegerRange(1, 200),
+      checkin: TIME_INTERVAL[getRandomIntegerRange(0, TIME_INTERVAL.length - 1)],
+      checkout: TIME_INTERVAL[getRandomIntegerRange(0, TIME_INTERVAL.length - 1)],
+      features: getRandomArrayElement(OFFER_FEATURES),
+      description: '',
+      photos: getRandomArrayElement(OFFER_PHOTOS),
+    },
+
+    location: {
+      lat: locationLat,
+      lng: locationLng,
+    },
+  };
+};
+
+const generateOffers = new Array(NUMBERS_OF_OFFERS).fill(null).map(createAdvent);
+generateOffers();
