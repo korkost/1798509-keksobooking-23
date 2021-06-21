@@ -3,7 +3,7 @@ import { createAd, NUMBERS_OF_OFFERS } from './data';
 //Генерация разметки похожих шаблонов
 const adTemplete = document.guerySelector('#card').content.querySelector('.popup');
 
-const ads = new Array(NUMBERS_OF_OFFERS).fill(null).map((value, index) => createAd(index + 1));
+const ads = new Array(NUMBERS_OF_OFFERS).fill(null).map((_element, index) => createAd(index + 1));
 const mapCanvas = document.querySelector('#map-canvas');
 
 function featureListElement(array, itemList) {
