@@ -84,4 +84,3 @@ const renderOffers = (element, image, content) => {
 };
 
 export { renderOffers } ;
-g
