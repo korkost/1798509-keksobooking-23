@@ -1,7 +1,10 @@
-import { getRandomIntegerRange, getRandomArrayElement } from './convert';
+import { getRandomIntegerRange, getRandomArrayElement } from './convert.js';
 // Данные для объекта
 const OFFER_TITLE = [
   'Большая квартира',
+  'Теплое шале',
+  'Уютная студия',
+  'С высоты птичего полета',
 ];
 const avatarNumbers = {
   MIN: 1,
@@ -16,7 +19,12 @@ const OFFER_PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
-
+const DESCRIPTION = [
+  'Шале',
+  'Аппартаменты',
+  'Студия',
+  'Пентхаус',
+];
 const priceRange = {
   MIN: 1000,
   MAX: 100000,
@@ -38,9 +46,6 @@ const locationLng = {
   MIN: 139.70000,
   MAX: 139.80000,
 };
-const avatars = avatarNumbers.map((value) => `img/avatars/user${value}.png`);
-
-const NUMBERS_OF_OFFERS = 10;
 
 const createAd = () => {
   const lat = getRandomIntegerRange(locationLat, 5);
@@ -48,20 +53,20 @@ const createAd = () => {
 
   return {
     author: {
-      avatar: getRandomArrayElement(avatars),
+      avatar: `img/avatars/user0${getRandomIntegerRange(avatarNumbers.MIN, avatarNumbers.MAX)}.png`,
     },
     offer: {
       title: OFFER_TITLE,
       address: `${lat}, ${lng}`,
       price: getRandomIntegerRange(priceRange.MIN, priceRange.MAX),
-      type: OFFER_TYPE[getRandomIntegerRange(0, OFFER_TYPE.length - 1)],
+      type: getRandomArrayElement(OFFER_TYPE),
       rooms: getRandomIntegerRange(countRooms.MIN, countRooms.MAX),
       guests: getRandomIntegerRange(countGuest.MIN, countGuest.MAX),
-      checkin: TIME_INTERVAL[getRandomIntegerRange(0, TIME_INTERVAL.length - 1)],
-      checkout: TIME_INTERVAL[getRandomIntegerRange(0, TIME_INTERVAL.length - 1)],
-      features: getRandomIntegerRange(OFFER_FEATURES),
-      description: '',
-      photos: getRandomIntegerRange(OFFER_PHOTOS),
+      checkin: getRandomArrayElement(TIME_INTERVAL),
+      checkout: getRandomArrayElement(TIME_INTERVAL),
+      features: getRandomArrayElement(OFFER_FEATURES),
+      description: getRandomArrayElement(DESCRIPTION),
+      photos: getRandomArrayElement(OFFER_PHOTOS),
     },
 
     location: {
@@ -71,4 +76,7 @@ const createAd = () => {
   };
 };
 
-export { createAd, NUMBERS_OF_OFFERS };
+
+const generateOffers = (quantityOffers) => new Array(quantityOffers).fill(null).map(createAd);
+
+export { generateOffers };

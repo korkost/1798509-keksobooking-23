@@ -1,4 +1,5 @@
-import { createAd, NUMBERS_OF_OFFERS } from './data';
+import { generateOffers } from './data.js';
 
-const generateOffers = new Array(NUMBERS_OF_OFFERS).fill(null).map(createAd);
-generateOffers();
+const NUMBERS_OF_OFFERS = 10;
+
+generateOffers(NUMBERS_OF_OFFERS);
