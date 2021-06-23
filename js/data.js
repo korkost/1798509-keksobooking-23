@@ -76,7 +76,6 @@ const createAd = () => {
   };
 };
 
-
 const generateOffers = (quantityOffers) => new Array(quantityOffers).fill(null).map(createAd);
 
 export { generateOffers };
