@@ -10,16 +10,16 @@ const getHousingTypeName = (type) => {
     case 'flat':
       housingType = 'Квартира';
       break;
- case 'palace':
+    case 'palace':
       housingType = 'Дворец';
       break;
- case 'house':
+    case 'house':
       housingType = 'Дом';
       break;
- case 'bungalow':
+    case 'bungalow':
       housingType = 'Бунгало';
       break;
- case 'hotel':
+    case 'hotel':
       housingType = 'Отель';
       break;
     default:
@@ -37,8 +37,11 @@ const description = adElement.querySelector('.popup__description');
 const getTextContent = (content, element) => {
   if (content) {
     element.textContent = content;
+    return;
   }
-	return;
+
+  element.style.display = 'none';
+  element.textContent = '';
 };
 
 const createListItem = (content) => {
@@ -83,4 +86,4 @@ const renderOffers = (element, image, content) => {
   renderTemplate(image, content);
 };
 
-export { renderOffers } ;
+export { renderOffers };

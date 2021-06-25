@@ -6,7 +6,7 @@ const OFFER_TITLE = [
   'Уютная студия',
   'С высоты птичего полета',
 ];
-const avatarNumbers = {
+const AvatarNumbers = {
   MIN: 1,
   MAX: 10,
 };
@@ -46,15 +46,15 @@ const LocationLng = {
   MIN: 139.70000,
   MAX: 139.80000,
 };
-const DECIMALS = 5;
+const DECIMAL = 5;
 
-const createAd = (item, index) => {
-  const lat = getRandomIntegerRange(LocationLat, DECIMALS);
-  const lng = getRandomIntegerRange(LocationLng, DECIMALS);
+const createAd = () => {
+  const lat = getRandomIntegerRange(LocationLat, DECIMAL);
+  const lng = getRandomIntegerRange(LocationLng, DECIMAL);
 
   return {
     author: {
-      avatar: `img/avatars/user0${getRandomIntegerRange(avatarNumbers.MIN, avatarNumbers.MAX)}.png`,
+      avatar: `img/avatars/user0${getRandomIntegerRange(AvatarNumbers.MIN, AvatarNumbers.MAX)}.png`,
     },
     offer: {
       title: getRandomArrayElement(OFFER_TITLE),
@@ -80,3 +80,4 @@ const createAd = (item, index) => {
 const generateOffers = (quantityOffers) => new Array(quantityOffers).fill(null).map(createAd);
 
 export { generateOffers };
+
