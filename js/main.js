@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { generateOffers } from './offer.js';
 import { renderOffers } from './templete.js';
 
