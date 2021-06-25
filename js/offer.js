@@ -25,43 +25,44 @@ const DESCRIPTION = [
   'Студия',
   'Пентхаус',
 ];
-const priceRange = {
+const PriceRange = {
   MIN: 1000,
   MAX: 100000,
 };
-const countRooms = {
+const CountRooms = {
   MIN: 1,
   MAX: 10,
 };
 
-const countGuest = {
+const CountGuest = {
   MIN: 1,
   MAX: 20,
 };
-const locationLat = {
+const LocationLat = {
   MIN: 35.65000,
   MAX: 35.70000,
 };
-const locationLng = {
+const LocationLng = {
   MIN: 139.70000,
   MAX: 139.80000,
 };
+const DECIMALS = 5;
 
-const createAd = () => {
-  const lat = getRandomIntegerRange(locationLat, 5);
-  const lng = getRandomIntegerRange(locationLng, 5);
+const createAd = (item, index) => {
+  const lat = getRandomIntegerRange(LocationLat, DECIMALS);
+  const lng = getRandomIntegerRange(LocationLng, DECIMALS);
 
   return {
     author: {
       avatar: `img/avatars/user0${getRandomIntegerRange(avatarNumbers.MIN, avatarNumbers.MAX)}.png`,
     },
     offer: {
-      title: OFFER_TITLE,
+      title: getRandomArrayElement(OFFER_TITLE),
       address: `${lat}, ${lng}`,
-      price: getRandomIntegerRange(priceRange.MIN, priceRange.MAX),
+      price: getRandomIntegerRange(PriceRange.MIN, PriceRange.MAX),
       type: getRandomArrayElement(OFFER_TYPE),
-      rooms: getRandomIntegerRange(countRooms.MIN, countRooms.MAX),
-      guests: getRandomIntegerRange(countGuest.MIN, countGuest.MAX),
+      rooms: getRandomIntegerRange(CountRooms.MIN, CountRooms.MAX),
+      guests: getRandomIntegerRange(CountGuest.MIN, CountGuest.MAX),
       checkin: getRandomArrayElement(TIME_INTERVAL),
       checkout: getRandomArrayElement(TIME_INTERVAL),
       features: getRandomArrayElement(OFFER_FEATURES),
