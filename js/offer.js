@@ -1,5 +1,5 @@
-import { getRandomIntegerRange, getRandomArrayElement } from './convert.js';
-// Данные для объекта
+import { getRandomIntegerRange, getRandomArrayElement, getRandomCoordinates } from './convert.js';
+
 const OFFER_TITLE = [
   'Большая квартира',
   'Теплое шале',
@@ -49,8 +49,8 @@ const LocationLng = {
 const DECIMAL = 5;
 
 const createAd = () => {
-  const lat = getRandomIntegerRange(LocationLat, DECIMAL);
-  const lng = getRandomIntegerRange(LocationLng, DECIMAL);
+  const lat = getRandomCoordinates(LocationLat.MIN, LocationLat.MAX, DECIMAL);
+  const lng = getRandomCoordinates(LocationLng.MIN, LocationLng.MAX, DECIMAL);
 
   return {
     author: {
