@@ -40,9 +40,9 @@ const getTextContent = (content, element) => {
   element.textContent = '';
 };
 
-const createFeatures = (content) => {
+const createFeatures = (contents) => {
   const featuresList = document.createDocumentFragment();
-  content.forEach((content) => {
+  contents.forEach((content) => {
     const featureItem = document.createElement('li');
     featureItem.classList.add('popup__feature');
     featureItem.classList.add(`popup__feature--${content}`);
