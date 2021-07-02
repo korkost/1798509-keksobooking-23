@@ -1,4 +1,4 @@
-import { getRandomIntegerRange, getRandomArrayElement, getRandomCoordinates } from './convert.js';
+import { getRandomIntegerRange, getRandomArrayElement, getRandomCoordinates, getRandomArray } from './convert.js';
 
 const OFFER_TITLE = [
   'Большая квартира',
@@ -65,9 +65,9 @@ const createAd = () => {
       guests: getRandomIntegerRange(CountGuest.MIN, CountGuest.MAX),
       checkin: getRandomArrayElement(TIME_INTERVAL),
       checkout: getRandomArrayElement(TIME_INTERVAL),
-      features: getRandomArrayElement(OFFER_FEATURES),
+      features: getRandomArray(OFFER_FEATURES),
       description: getRandomArrayElement(DESCRIPTION),
-      photos: getRandomArrayElement(OFFER_PHOTOS),
+      photos: getRandomArray(OFFER_PHOTOS),
     },
 
     location: {
