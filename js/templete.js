@@ -28,10 +28,6 @@ const getHousingTypeName = (type) => {
   return housingType;
 };
 
-const clearContent = (element) => element.innerHTML = '';
-
-const popupFeatures = adElement.querySelector('.popup__features');
-const popupPhotos = adElement.querySelector('.popup__photos');
 const description = adElement.querySelector('.popup__description');
 
 const getTextContent = (content, element) => {
@@ -44,23 +40,29 @@ const getTextContent = (content, element) => {
   element.textContent = '';
 };
 
-const createListItem = (content) => {
-  const listItem = document.createElement('li');
-  listItem.classList.add('popup__feature');
-  listItem.classList.add(`popup__feature--${content}`);
-
-  return listItem;
+const createFeatures = (contents) => {
+  const featuresList = document.createDocumentFragment();
+  contents.forEach((content) => {
+    const featureItem = document.createElement('li');
+    featureItem.classList.add('popup__feature');
+    featureItem.classList.add(`popup__feature--${content}`);
+    featuresList.appendChild(featureItem);
+  });
+  return featuresList;
 };
 
 const createImage = (content) => {
-  const image = document.createElement('img');
-  image.src = content;
-  image.classList.add('popup__photo');
-  image.width = '45';
-  image.height = '40';
-  image.alt = 'Фотография жилья';
-
-  return image;
+  const photosList = document.createDocumentFragment();
+  content.forEach((photo) => {
+    const photoItem = document.createElement('img');
+    photoItem.classList.add('popup__photo');
+    photoItem.src = photo;
+    photoItem.alt = 'Фотография жилья';
+    photoItem.width = 45;
+    photoItem.height = 40;
+    photosList.appendChild(photoItem);
+  });
+  return photosList;
 };
 
 const renderTemplate = (image, content) => {
@@ -71,14 +73,13 @@ const renderTemplate = (image, content) => {
   adElement.querySelector('.popup__type').textContent = getHousingTypeName(content.type);
   adElement.querySelector('.popup__text--capacity').textContent = `${content.rooms} комнаты для ${content.guests} гостей`;
   adElement.querySelector('.popup__text--time').textContent = `Заезд после ${content.checkin}, выезд до ${content.checkout}`;
-
-  clearContent(popupFeatures);
-  popupFeatures.append(createListItem(content.features));
+  adElement.querySelector('.popup__features').innerHTML = '';
+  adElement.querySelector('.popup__features').appendChild(createFeatures(content.features));
+  adElement.querySelector('.popup__photos').innerHTML = '';
+  adElement.querySelector('.popup__photos').appendChild(createImage(content.photos));
 
   getTextContent(content.description, description);
 
-  clearContent(popupPhotos);
-  popupPhotos.append(createImage(content.photo));
 };
 
 const renderOffers = (element, image, content) => {

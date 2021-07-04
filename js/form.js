@@ -1,3 +1,4 @@
+const mapCanvas = document.querySelector('#map-canvas');
 const adForm = document.querySelector('.ad-form');
 const fieldsets = adForm.querySelectorAll('fieldset');
 const mapFilters = document.querySelector('.map__filters');
@@ -27,5 +28,5 @@ const setActive = () => {
   }
 };
 
-export { setInactive, setActive };
+export { mapCanvas, setInactive, setActive };
 
