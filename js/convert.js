@@ -21,4 +21,10 @@ const getRandomArrayElement = (elements) => (elements[getRandomIntegerRange(0, e
 
 const getRandomArray = (array) => array.filter(() => getRandomIntegerRange(0, 1));
 
-export { getRandomIntegerRange, getRandomArrayElement, getRandomCoordinates, getRandomArray };
+const maxLengthCheck = (input) => {
+  if (input.value.length > input.maxLength) {
+    input.value = input.value.slice(0, input.maxLength);
+  }
+};
+
+export { getRandomIntegerRange, getRandomArrayElement, getRandomCoordinates, getRandomArray, maxLengthCheck };
