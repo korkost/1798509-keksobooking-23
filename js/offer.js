@@ -80,5 +80,5 @@ const getOfferObj = () => ({
 
 const generateOffers = (quantityOffers) => new Array(quantityOffers).fill(null).map(getOfferObj);
 
-export { generateOffers };
+export { generateOffers, getLocationData };
 
