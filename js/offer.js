@@ -48,36 +48,37 @@ const LocationLng = {
 };
 const DECIMAL = 5;
 
-const createAd = () => {
-  const lat = getRandomCoordinates(LocationLat.MIN, LocationLat.MAX, DECIMAL);
-  const lng = getRandomCoordinates(LocationLng.MIN, LocationLng.MAX, DECIMAL);
+const getAuthorData = () => ({
+  avatar: `img/avatars/user0${getRandomIntegerRange(AvatarNumbers.MIN, AvatarNumbers.MAX)}.png`,
+});
 
-  return {
-    author: {
-      avatar: `img/avatars/user0${getRandomIntegerRange(AvatarNumbers.MIN, AvatarNumbers.MAX)}.png`,
-    },
-    offer: {
-      title: getRandomArrayElement(OFFER_TITLE),
-      address: `${lat}, ${lng}`,
-      price: getRandomIntegerRange(PriceRange.MIN, PriceRange.MAX),
-      type: getRandomArrayElement(OFFER_TYPE),
-      rooms: getRandomIntegerRange(CountRooms.MIN, CountRooms.MAX),
-      guests: getRandomIntegerRange(CountGuest.MIN, CountGuest.MAX),
-      checkin: getRandomArrayElement(TIME_INTERVAL),
-      checkout: getRandomArrayElement(TIME_INTERVAL),
-      features: getRandomArray(OFFER_FEATURES),
-      description: getRandomArrayElement(DESCRIPTION),
-      photos: getRandomArray(OFFER_PHOTOS),
-    },
+const createAd = () => ({
+  title: getRandomArrayElement(OFFER_TITLE),
+  address: `${getRandomCoordinates(LocationLat.MIN, LocationLat.MAX, DECIMAL)}, ${getRandomCoordinates(LocationLng.MIN, LocationLng.MAX, DECIMAL)}`,
+  price: getRandomIntegerRange(PriceRange.MIN, PriceRange.MAX),
+  type: getRandomArrayElement(OFFER_TYPE),
+  rooms: getRandomIntegerRange(CountRooms.MIN, CountRooms.MAX),
+  guests: getRandomIntegerRange(CountGuest.MIN, CountGuest.MAX),
+  checkin: getRandomArrayElement(TIME_INTERVAL),
+  checkout: getRandomArrayElement(TIME_INTERVAL),
+  features: getRandomArray(OFFER_FEATURES),
+  description: getRandomArrayElement(DESCRIPTION),
+  photos: getRandomArray(OFFER_PHOTOS),
+});
 
-    location: {
-      lat: lat,
-      lng: lng,
-    },
-  };
-};
+const getLocationData = () => ({
+  lat: getRandomCoordinates(LocationLat.MIN, LocationLat.MAX, DECIMAL),
+  lng: getRandomCoordinates(LocationLng.MIN, LocationLng.MAX, DECIMAL),
+});
 
-const generateOffers = (quantityOffers) => new Array(quantityOffers).fill(null).map(createAd);
 
-export { generateOffers };
+const getOfferObj = () => ({
+  author: getAuthorData(),
+  offer: createAd(),
+  location: getLocationData(),
+});
+
+const generateOffers = (quantityOffers) => new Array(quantityOffers).fill(null).map(getOfferObj);
+
+export { generateOffers, getLocationData };
 

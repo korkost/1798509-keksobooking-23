@@ -1,5 +1,9 @@
+const mapCanvas = document.querySelector('#map-canvas');
 const adTemplete = document.querySelector('#card').content.querySelector('.popup');
 const adElement = adTemplete.cloneNode(true);
+
+const HEIGHT_PHOTO = 40;
+const WIDHT_PHOTO = 45;
 
 const PricePerNight = document.createElement('span');
 PricePerNight.textContent = 'Р.ночь';
@@ -58,8 +62,8 @@ const createImage = (content) => {
     photoItem.classList.add('popup__photo');
     photoItem.src = photo;
     photoItem.alt = 'Фотография жилья';
-    photoItem.width = 45;
-    photoItem.height = 40;
+    photoItem.width = WIDHT_PHOTO;
+    photoItem.height = HEIGHT_PHOTO;
     photosList.appendChild(photoItem);
   });
   return photosList;
@@ -87,5 +91,5 @@ const renderOffers = (element, image, content) => {
   renderTemplate(image, content);
 };
 
-export { renderOffers };
+export { renderOffers, mapCanvas };
 
