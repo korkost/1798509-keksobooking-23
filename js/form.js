@@ -3,7 +3,8 @@ import { getLocationData } from './offer.js';
 
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
-const typeCategoryPriceValue = {
+
+const TypeCategoryPriceValue = {
   BUNGALOW: 0,
   FLAT: 1000,
   HOTEL: 3000,
@@ -53,8 +54,8 @@ const validatePriceInput = () => {
 const syncPriceWithType = (evt) => {
   const target = evt.target;
 
-  priceInput.min = typeCategoryPriceValue[target.value.toUpperCase()];
-  priceInput.placeholder = typeCategoryPriceValue[target.value.toUpperCase()];
+  priceInput.min = TypeCategoryPriceValue[target.value.toUpperCase()];
+  priceInput.placeholder = TypeCategoryPriceValue[target.value.toUpperCase()];
 };
 
 // Адрес
@@ -93,25 +94,21 @@ const changeCapacityRooms = (evt) => {
 // Управление состоянием формы
 
 const addFormEventListeners = () => {
-  window.onload = function () {
-    titleInput.addEventListener('input', checkTitleValid);
-    priceInput.addEventListener('input', validatePriceInput);
-    houseTypeSelect.addEventListener('change', syncPriceWithType);
-    timeInSelect.addEventListener('change', changeTimeInInput);
-    timeOutSelect.addEventListener('change', changeTimeOutInput);
-    roomNumberSelect.addEventListener('change', changeCapacityRooms);
-  };
+  titleInput.addEventListener('input', checkTitleValid);
+  priceInput.addEventListener('input', validatePriceInput);
+  houseTypeSelect.addEventListener('change', syncPriceWithType);
+  timeInSelect.addEventListener('change', changeTimeInInput);
+  timeOutSelect.addEventListener('change', changeTimeOutInput);
+  roomNumberSelect.addEventListener('change', changeCapacityRooms);
 };
 
 const removeFormEventListeners = () => {
-  window.onload = function () {
-    titleInput.removeEventListener('input', checkTitleValid);
-    priceInput.removeEventListener('input', validatePriceInput);
-    houseTypeSelect.removeEventListener('change', syncPriceWithType);
-    timeInSelect.removeEventListener('change', changeTimeInInput);
-    timeOutSelect.removeEventListener('change', changeTimeOutInput);
-    roomNumberSelect.removeEventListener('change', changeCapacityRooms);
-  };
+  titleInput.removeEventListener('input', checkTitleValid);
+  priceInput.removeEventListener('input', validatePriceInput);
+  houseTypeSelect.removeEventListener('change', syncPriceWithType);
+  timeInSelect.removeEventListener('change', changeTimeInInput);
+  timeOutSelect.removeEventListener('change', changeTimeOutInput);
+  roomNumberSelect.removeEventListener('change', changeCapacityRooms);
 };
 
 const disableForm = () => {
