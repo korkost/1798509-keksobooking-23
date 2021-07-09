@@ -15,7 +15,7 @@ const TOKYO_CENTER = {
   lng: 139.745438,
 };
 const SCALE = 10;
-
+const offersArray = generateOffersArray();
 const mapContainer = document.querySelector('#map-canvas');
 const address = document.querySelector('#address');
 
@@ -82,4 +82,6 @@ mainPinMarker.on('add', changeAddressValue);
 mainPinMarker.on('drag', changeAddressValue);
 mainPinMarker.addTo(map);
 
-generateOffersArray.forEach(createPopup);
+offersArray.forEach((advert) => {
+  createPopup(advert);
+});
