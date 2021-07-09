@@ -18,7 +18,7 @@ const ROOM_CAPACITY_VALUES = {
 };
 const adForm = document.querySelector('.ad-form');
 const filterForm = document.querySelector('.map__filters');
-const adFormElements = Array.from(adForm.children);
+const adFormElements = [...adForm.children];
 const filterFormElements = Array.from(filterForm.children);
 
 const titleInput = adForm.querySelector('#title');
@@ -60,7 +60,9 @@ const syncPriceWithType = (evt) => {
 // Адрес
 
 export const сompleteAddressInput = (coords) => {
-  addressInput.value = coords;
+  if (coords) {
+    addressInput.value = coords;
+  }
 };
 
 // Время заезда и Время выезда

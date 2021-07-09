@@ -1,6 +1,6 @@
 import { getRandomIntegerRange, getRandomArrayElement, getRandomCoordinates, getRandomArray } from './convert.js';
 
-const NUMBERS_OF_OFFERS = 10;
+export const NUMBERS_OF_OFFERS = 10;
 const OFFER_TITLE = [
   'Большая квартира',
   'Теплое шале',

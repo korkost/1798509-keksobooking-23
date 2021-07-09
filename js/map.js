@@ -1,100 +1,85 @@
-import { disableForm, activateForm, сompleteAddressInput } from './form.js';
+import { activateForm } from './form.js';
 import { generateOffersArray, DECIMAL } from './offer.js';
 import { renderTemplate } from './templete.js';
 
-const mainPickIconSize = [52, 52];
-const mainPickIconAnchor = [26, 52];
-const markerIconSize = [40, 40];
-const markerIconAnchor = [20, 40];
-const MAP_SCALE = 10;
-
-
-const offersArray = generateOffersArray();
-const DefaultCoords = {
-  LAT: 35.65160,
-  LNG: 139.74908,
+const MAIN_ICON_HEIGHT = 52;
+const MAIN_ICON_WIDTH = 52;
+const POPUP_ICON_HEIGHT = 40;
+const POPUP_ICON_WIDTH = 40;
+const ANCHOR_X = 26;
+const ANCHOR_Y = 52;
+const POPUP_ANCHOR_X = 20;
+const POPUP_ANCHOR_Y = 40;
+const TOKYO_CENTER = {
+  lat: 35.658581,
+  lng: 139.745438,
 };
+const SCALE = 10;
 
-disableForm();
+const mapContainer = document.querySelector('#map-canvas');
+const address = document.querySelector('#address');
 
-export const map = L.map('map-canvas')
-  .on('load', () => activateForm())
-  .setView({
-    lat: DefaultCoords.LAT,
-    lng: DefaultCoords.LNG,
-  }, MAP_SCALE);
-
-L.tileLayer(
-  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-})
-  .addTo(map);
-
-//Рисуем пины
-const defaultMarkerIcon = L.icon({
-  iconUrl: 'img/main-pin.svg',
-  iconSize: mainPickIconSize,
-  iconAnchor: mainPickIconAnchor,
+export const map = L.map(mapContainer);
+const mainPinIcon = L.icon({
+  iconUrl: '../img/main-pin.svg',
+  iconSize: [MAIN_ICON_HEIGHT, MAIN_ICON_WIDTH],
+  iconAnchor: [ANCHOR_X, ANCHOR_Y],
 });
 
-const defaultMarker = L.marker(
+const mainPinMarker = L.marker(
   {
-    lat: DefaultCoords.LAT,
-    lng: DefaultCoords.LNG,
+    lat: TOKYO_CENTER.lat,
+    lng: TOKYO_CENTER.lng,
   },
   {
     draggable: true,
-    icon: defaultMarkerIcon,
+    icon: mainPinIcon,
   },
 );
 
-defaultMarker.addTo(map);
-
-const getMarkerCoords = () => {
-  сompleteAddressInput(`${DefaultCoords.LAT}, ${DefaultCoords.LNG}`);
-
-  defaultMarker.on('drag', (event) => {
-    const coords = event.target.getLatLng();
-    const lat = coords.LAT.toFixed(DECIMAL);
-    const lng = coords.LNG.toFixed(DECIMAL);
-
-    сompleteAddressInput(`${lat}, ${lng}`);
-  });
-};
-
-getMarkerCoords();
-
-const createMarkerGroup = L.layerGroup().addTo(map);
-const createMarker = (offerData) => {
-  const { location } = offerData;
-};
-
-const markerIcon = L.icon({
-  iconUrl: 'img/pin.svg',
-  iconSize: markerIconSize,
-  iconAnchor: markerIconAnchor,
+const popupIcon = L.icon({
+  iconUrl: '../img/pin.svg',
+  iconSize: [POPUP_ICON_HEIGHT, POPUP_ICON_WIDTH],
+  iconAnchor: [POPUP_ANCHOR_X, POPUP_ANCHOR_Y],
 });
 
-const marker = L.marker(
-  {
-    lat: location.lat,
-    lng: location.lng,
-  },
-  {
-    icon: markerIcon,
-    riseOnHover: true,
-  },
-);
+const layer = L.layerGroup().addTo(map);
 
-marker
-  .addTo(createMarkerGroup)
-  .bindPopup(
-    renderTemplate(offerData),
+const createPopup = (advert) => {
+  const { lat, lng } = advert.location;
+  const marker = L.marker(
     {
-      keepInView: true,
+      lat,
+      lng,
+    },
+    {
+      popupIcon,
     },
   );
 
-offersArray.forEach((offer) => {
-  createMarker(offer);
-});
+  marker.addTo(layer).bindPopup(renderTemplate(advert));
+};
+
+const changeAddressValue = ({ target }) => {
+  const latlng = target.getLatLng();
+  address.value = `${latlng.lat.toFixed(DECIMAL)} ${latlng.lng.toFixed(DECIMAL)}`;
+};
+
+map.on('load', activateForm).setView(
+  {
+    lat: TOKYO_CENTER.lat,
+    lng: TOKYO_CENTER.lng,
+  },
+  SCALE,
+);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution:
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+}).addTo(map);
+
+mainPinMarker.on('add', changeAddressValue);
+mainPinMarker.on('drag', changeAddressValue);
+mainPinMarker.addTo(map);
+
+generateOffersArray.forEach(createPopup);
