@@ -1,5 +1,6 @@
 import { getRandomIntegerRange, getRandomArrayElement, getRandomCoordinates, getRandomArray } from './convert.js';
 
+const NUMBERS_OF_OFFERS = 10;
 const OFFER_TITLE = [
   'Большая квартира',
   'Теплое шале',
@@ -78,7 +79,6 @@ const getOfferObj = () => ({
   location: getLocationData(),
 });
 
-const generateOffers = (quantityOffers) => new Array(quantityOffers).fill(null).map(getOfferObj);
+const generateOffersArray = () => new Array(NUMBERS_OF_OFFERS).fill(null).map(getOfferObj);
 
-export { generateOffers, getLocationData };
-
+export { NUMBERS_OF_OFFERS, DECIMAL, generateOffersArray, getLocationData, createAd };

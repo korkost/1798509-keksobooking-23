@@ -27,4 +27,4 @@ const maxLengthCheck = (input) => {
   }
 };
 
-export { getRandomIntegerRange, getRandomArrayElement, getRandomCoordinates, getRandomArray, maxLengthCheck };
+export { maxLengthCheck, getRandomArray, getRandomArrayElement, getRandomCoordinates, getRandomIntegerRange };

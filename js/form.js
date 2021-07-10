@@ -1,5 +1,4 @@
 import { maxLengthCheck } from './convert.js';
-import { getLocationData } from './offer.js';
 
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
@@ -19,7 +18,7 @@ const ROOM_CAPACITY_VALUES = {
 };
 const adForm = document.querySelector('.ad-form');
 const filterForm = document.querySelector('.map__filters');
-const adFormElements = Array.from(adForm.children);
+const adFormElements = [...adForm.children];
 const filterFormElements = Array.from(filterForm.children);
 
 const titleInput = adForm.querySelector('#title');
@@ -60,8 +59,10 @@ const syncPriceWithType = (evt) => {
 
 // Адрес
 
-const сompleteAddressInput = () => {
-  addressInput.value = `${getLocationData().lat}, ${getLocationData().lng}`;
+const сompleteAddressInput = (coords) => {
+  if (coords) {
+    addressInput.value = coords;
+  }
 };
 
 // Время заезда и Время выезда
@@ -126,9 +127,11 @@ const activateForm = () => {
   filterForm.classList.remove('ad-form--disable');
   filterFormElements.forEach((element) => element.disabled = false);
 
+  filterForm.classList.remove('ad-form--disable');
+  filterFormElements.forEach((element) => element.disabled = false);
+
   addFormEventListeners();
   сompleteAddressInput();
 };
 
-export { disableForm, activateForm };
-
+export { activateForm, disableForm, addressInput };
