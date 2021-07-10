@@ -1,6 +1,6 @@
 import { getRandomIntegerRange, getRandomArrayElement, getRandomCoordinates, getRandomArray } from './convert.js';
 
-export const NUMBERS_OF_OFFERS = 10;
+const NUMBERS_OF_OFFERS = 10;
 const OFFER_TITLE = [
   'Большая квартира',
   'Теплое шале',
@@ -47,13 +47,13 @@ const LocationLng = {
   MIN: 139.70000,
   MAX: 139.80000,
 };
-export const DECIMAL = 5;
+const DECIMAL = 5;
 
 const getAuthorData = () => ({
   avatar: `img/avatars/user0${getRandomIntegerRange(AvatarNumbers.MIN, AvatarNumbers.MAX)}.png`,
 });
 
-export const createAd = () => ({
+const createAd = () => ({
   title: getRandomArrayElement(OFFER_TITLE),
   address: `${getRandomCoordinates(LocationLat.MIN, LocationLat.MAX, DECIMAL)}, ${getRandomCoordinates(LocationLng.MIN, LocationLng.MAX, DECIMAL)}`,
   price: getRandomIntegerRange(PriceRange.MIN, PriceRange.MAX),
@@ -67,7 +67,7 @@ export const createAd = () => ({
   photos: getRandomArray(OFFER_PHOTOS),
 });
 
-export const getLocationData = () => ({
+const getLocationData = () => ({
   lat: getRandomCoordinates(LocationLat.MIN, LocationLat.MAX, DECIMAL),
   lng: getRandomCoordinates(LocationLng.MIN, LocationLng.MAX, DECIMAL),
 });
@@ -79,6 +79,6 @@ const getOfferObj = () => ({
   location: getLocationData(),
 });
 
-export const generateOffersArray = () => new Array(NUMBERS_OF_OFFERS).fill(null).map(getOfferObj);
+const generateOffersArray = () => new Array(NUMBERS_OF_OFFERS).fill(null).map(getOfferObj);
 
-
+export { NUMBERS_OF_OFFERS, DECIMAL, generateOffersArray, getLocationData, createAd };

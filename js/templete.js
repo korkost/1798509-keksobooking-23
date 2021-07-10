@@ -29,7 +29,7 @@ const getHousingTypeName = (type) => {
 };
 
 
-export const renderTemplate = (offerData) => {
+const renderTemplate = (offerData) => {
   const { author, offer } = offerData;
   const adTemplete = document.querySelector('#card')
     .content
@@ -91,3 +91,5 @@ export const renderTemplate = (offerData) => {
 
   return adElement;
 };
+
+export { renderTemplate };

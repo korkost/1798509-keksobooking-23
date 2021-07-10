@@ -1,5 +1,5 @@
 import { activateForm, addressInput } from './form.js';
-import { generateOffersArray, DECIMAL } from './offer.js';
+import { generateOffersArray, DECIMAL, NUMBERS_OF_OFFERS } from './offer.js';
 import { renderTemplate } from './templete.js';
 
 const MAIN_ICON_HEIGHT = 52;
@@ -14,11 +14,11 @@ const TOKYO_CENTER = {
   lat: 35.658581,
   lng: 139.745438,
 };
-const SCALE = 10;
+
 const offersArray = generateOffersArray();
 const mapContainer = document.querySelector('#map-canvas');
 
-export const map = L.map(mapContainer);
+const map = L.map(mapContainer);
 const mainPinIcon = L.icon({
   iconUrl: '../img/main-pin.svg',
   iconSize: [MAIN_ICON_HEIGHT, MAIN_ICON_WIDTH],
@@ -69,7 +69,7 @@ map.on('load', activateForm).setView(
     lat: TOKYO_CENTER.lat,
     lng: TOKYO_CENTER.lng,
   },
-  SCALE,
+  NUMBERS_OF_OFFERS,
 );
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -84,3 +84,5 @@ mainPinMarker.addTo(map);
 offersArray.forEach((advert) => {
   createPopup(advert);
 });
+
+export { map };

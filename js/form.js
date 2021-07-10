@@ -24,7 +24,7 @@ const filterFormElements = Array.from(filterForm.children);
 const titleInput = adForm.querySelector('#title');
 const houseTypeSelect = adForm.querySelector('#type');
 const priceInput = adForm.querySelector('#price');
-export const addressInput = adForm.querySelector('#address');
+const addressInput = adForm.querySelector('#address');
 const timeInSelect = adForm.querySelector('#timein');
 const timeOutSelect = adForm.querySelector('#timeout');
 const roomNumberSelect = adForm.querySelector('#room_number');
@@ -59,7 +59,7 @@ const syncPriceWithType = (evt) => {
 
 // Адрес
 
-export const сompleteAddressInput = (coords) => {
+const сompleteAddressInput = (coords) => {
   if (coords) {
     addressInput.value = coords;
   }
@@ -112,7 +112,7 @@ const removeFormEventListeners = () => {
   roomNumberSelect.removeEventListener('change', changeCapacityRooms);
 };
 
-export const disableForm = () => {
+const disableForm = () => {
   adForm.classList.add('ad-form--disable');
   adFormElements.forEach((element) => element.disabled = true);
 
@@ -123,7 +123,7 @@ export const disableForm = () => {
   сompleteAddressInput();
 };
 
-export const activateForm = () => {
+const activateForm = () => {
   filterForm.classList.remove('ad-form--disable');
   filterFormElements.forEach((element) => element.disabled = false);
 
@@ -134,4 +134,4 @@ export const activateForm = () => {
   сompleteAddressInput();
 };
 
-
+export { activateForm, disableForm, addressInput };
