@@ -1,4 +1,4 @@
-import { activateForm } from './form.js';
+import { activateForm, addressInput } from './form.js';
 import { generateOffersArray, DECIMAL } from './offer.js';
 import { renderTemplate } from './templete.js';
 
@@ -17,7 +17,6 @@ const TOKYO_CENTER = {
 const SCALE = 10;
 const offersArray = generateOffersArray();
 const mapContainer = document.querySelector('#map-canvas');
-const address = document.querySelector('#address');
 
 export const map = L.map(mapContainer);
 const mainPinIcon = L.icon({
@@ -60,9 +59,9 @@ const createPopup = (advert) => {
   marker.addTo(layer).bindPopup(renderTemplate(advert));
 };
 
-const changeAddressValue = ({ target }) => {
+const changeaddressInputValue = ({ target }) => {
   const latlng = target.getLatLng();
-  address.value = `${latlng.lat.toFixed(DECIMAL)} ${latlng.lng.toFixed(DECIMAL)}`;
+  addressInput.value = `${latlng.lat.toFixed(DECIMAL)} ${latlng.lng.toFixed(DECIMAL)}`;
 };
 
 map.on('load', activateForm).setView(
@@ -78,8 +77,8 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 }).addTo(map);
 
-mainPinMarker.on('add', changeAddressValue);
-mainPinMarker.on('drag', changeAddressValue);
+mainPinMarker.on('add', changeaddressInputValue);
+mainPinMarker.on('drag', changeaddressInputValue);
 mainPinMarker.addTo(map);
 
 offersArray.forEach((advert) => {
