@@ -1,3 +1,5 @@
+const ERROR_MESSAGE_SHOW_TIME = 3000;
+
 function getRandomIntegerRange(min, max) {
   if (max > min && max >= 0 && min >= 0) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -26,5 +28,24 @@ const maxLengthCheck = (input) => {
     input.value = input.value(0, input.maxLength);
   }
 };
+const showServerErrorMessage = () => {
+  const errorMessage = document.body.querySelector('.server-error');
+  errorMessage.classList.remove('hidden');
+  setTimeout(() => errorMessage.classList.add('hidden'), ERROR_MESSAGE_SHOW_TIME);
+};
 
-export { maxLengthCheck, getRandomArray, getRandomArrayElement, getRandomCoordinates, getRandomIntegerRange };
+const isEscPressed = (evt) => evt.key === 'Escape';
+
+const removeElementItself = (element) => element.parentNode.removeChild(element);
+
+
+export {
+  isEscPressed,
+  removeElementItself,
+  showServerErrorMessage,
+  maxLengthCheck,
+  getRandomArray,
+  getRandomArrayElement,
+  getRandomCoordinates,
+  getRandomIntegerRange
+};

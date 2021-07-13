@@ -1,4 +1,6 @@
 import { maxLengthCheck } from './convert.js';
+import { showErrorMessage, showSuccessMessage } from './error.js';
+import { sendData } from './api.js';
 
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
@@ -91,6 +93,15 @@ const changeCapacityRooms = (evt) => {
     capacitySelect.value = item;
   });
 };
+adForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+
+  sendData(
+    () => showSuccessMessage(),
+    () => showErrorMessage('Не удалось отправить форму. Попробуйте ещё раз'),
+    new FormData(adForm),
+  );
+});
 
 // Управление состоянием формы
 
@@ -110,6 +121,10 @@ const removeFormEventListeners = () => {
   timeInSelect.removeEventListener('change', changeTimeInInput);
   timeOutSelect.removeEventListener('change', changeTimeOutInput);
   roomNumberSelect.removeEventListener('change', changeCapacityRooms);
+};
+
+const adFormReset = () => {
+  adForm.reset();
 };
 
 const disableForm = () => {
@@ -134,4 +149,4 @@ const activateForm = () => {
   сompleteAddressInput();
 };
 
-export { activateForm, disableForm, addressInput };
+export { adFormReset, activateForm, disableForm, syncPriceWithType, addressInput };

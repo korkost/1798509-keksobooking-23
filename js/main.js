@@ -1,3 +1,3 @@
-import { map } from './map.js';
-
-map();
+import './form.js';
+import './map.js';
+import './api.js';

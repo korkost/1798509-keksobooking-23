@@ -1,7 +1,12 @@
-import { activateForm, addressInput } from './form.js';
-import { generateOffersArray, DECIMAL, NUMBERS_OF_OFFERS } from './offer.js';
+import { disableForm, activateForm, syncPriceWithType, addressInput } from './form.js';
 import { renderTemplate } from './templete.js';
+import { getData } from './api.js';
+import { showServerErrorMessage } from './convert.js';
 
+const MAP_PROVIDER_LINK = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+const OPEN_STREET_MAP_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+const MAIN_ICON_LINK = 'img/main-pin.svg';
+const POPUP_ICON_LINK = 'img/pin.svg';
 const MAIN_ICON_HEIGHT = 52;
 const MAIN_ICON_WIDTH = 52;
 const POPUP_ICON_HEIGHT = 40;
@@ -14,22 +19,20 @@ const TOKYO_CENTER = {
   lat: 35.658581,
   lng: 139.745438,
 };
-
-const offersArray = generateOffersArray();
+const DECIMAL = 5;
+const OFFERS = 10;
 const mapContainer = document.querySelector('#map-canvas');
 
 const map = L.map(mapContainer);
+const layer = L.layerGroup().addTo(map);
 const mainPinIcon = L.icon({
-  iconUrl: '../img/main-pin.svg',
+  iconUrl: MAIN_ICON_LINK,
   iconSize: [MAIN_ICON_HEIGHT, MAIN_ICON_WIDTH],
   iconAnchor: [ANCHOR_X, ANCHOR_Y],
 });
 
 const mainPinMarker = L.marker(
-  {
-    lat: TOKYO_CENTER.lat,
-    lng: TOKYO_CENTER.lng,
-  },
+  TOKYO_CENTER,
   {
     draggable: true,
     icon: mainPinIcon,
@@ -37,52 +40,45 @@ const mainPinMarker = L.marker(
 );
 
 const popupIcon = L.icon({
-  iconUrl: '../img/pin.svg',
+  iconUrl: POPUP_ICON_LINK,
   iconSize: [POPUP_ICON_HEIGHT, POPUP_ICON_WIDTH],
   iconAnchor: [POPUP_ANCHOR_X, POPUP_ANCHOR_Y],
 });
 
-const layer = L.layerGroup().addTo(map);
+const createPopups = (adverts) => {
+  adverts.forEach((advert) => {
+    const marker = L.marker(
+      advert.location,
+      {
+        popupIcon,
+      },
+    );
 
-const createPopup = (advert) => {
-  const { lat, lng } = advert.location;
-  const marker = L.marker(
-    {
-      lat,
-      lng,
-    },
-    {
-      popupIcon,
-    },
-  );
+    marker.addTo(layer).bindPopup(renderTemplate(advert));
+  });
 
-  marker.addTo(layer).bindPopup(renderTemplate(advert));
+  const syncPriceWithType = ({ target }) => {
+    const latlng = target.getLatLng();
+    addressInput.value = `${latlng.lat.toFixed(DECIMAL)} ${latlng.lng.toFixed(DECIMAL)}`;
+  };
+};
+const resetMap = () => {
+  mainPinMarker.setLatLng(TOKYO_CENTER);
+  map.setView(TOKYO_CENTER, OFFERS);
 };
 
-const changeaddressInputValue = ({ target }) => {
-  const latlng = target.getLatLng();
-  addressInput.value = `${latlng.lat.toFixed(DECIMAL)} ${latlng.lng.toFixed(DECIMAL)}`;
-};
+disableForm();
+map.on('load', activateForm).setView(TOKYO_CENTER, OFFERS);
 
-map.on('load', activateForm).setView(
-  {
-    lat: TOKYO_CENTER.lat,
-    lng: TOKYO_CENTER.lng,
-  },
-  NUMBERS_OF_OFFERS,
-);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution:
-    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+L.tileLayer(MAP_PROVIDER_LINK, {
+  attribution: OPEN_STREET_MAP_ATTR,
 }).addTo(map);
 
-mainPinMarker.on('add', changeaddressInputValue);
-mainPinMarker.on('drag', changeaddressInputValue);
+mainPinMarker.on('drag', syncPriceWithType);
 mainPinMarker.addTo(map);
 
-offersArray.forEach((advert) => {
-  createPopup(advert);
-});
+getData(createPopups, showServerErrorMessage);
 
-export { map };
+
+export { resetMap };

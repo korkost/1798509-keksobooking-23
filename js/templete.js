@@ -29,8 +29,7 @@ const getHousingTypeName = (type) => {
 };
 
 
-const renderTemplate = (offerData) => {
-  const { author, offer } = offerData;
+const renderTemplate = ({ author, offer }) => {
   const adTemplete = document.querySelector('#card')
     .content
     .querySelector('.popup');
@@ -73,7 +72,6 @@ const renderTemplate = (offerData) => {
     });
     return photosList;
   };
-
 
   adElement.querySelector('.popup__avatar').src = author.avatar;
   adElement.querySelector('.popup__title').textContent = offer.title;
