@@ -1001,31 +1001,6 @@ fieldset {
   opacity: 0.6;
 }
 
-.data-error {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: auto auto;
-  width: 90%;
-  max-width: 500px;
-  min-height: 250px;
-  background-color: rgba(0, 0, 0, 0.8);
-  border-radius: 8px;
-  position: absolute;
-  top: 20%;
-  right: 0;
-  left: 0;
-  z-index: 1111;
-}
-
-.data-error__message {
-  color: #ffffff;
-  font-size: 25px;
-  font-weight: 700;
-  padding: 30px;
-  text-align: center;
-}
-
 .visually-hidden {
   position: absolute;
 
@@ -1046,4 +1021,91 @@ fieldset {
 
 .hidden {
   display: none;
+}
+
+.validation-message {
+  display: block;
+  color: red;
+  padding-left: 5px;
+  padding-top: 2px;
+}
+
+.prompt {
+  position: relative;
+  display: inline-block;
+}
+
+.prompt .prompttext {
+  visibility: hidden;
+  width: 150px;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.prompt .prompttext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.prompt:hover .prompttext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup__description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+.server-error {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 20 px 40px;
+  min-width: 350px;
+  position: absolute;
+  right: 0px;
+  top: 20px;
+  border-radius: 10px;
+  border-left: 15px solid rgb(228, 210, 177);
+  animation: show_slide 1s ease forwards;
+}
+
+@keyframes show_slide {
+  0% {
+    transform: translateX(100%);
+  }
+  40% {
+    transform: translateX(-10%);
+  }
+  80% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-10px);
+  }
+}
+
+.server-error__message {
+  padding: 0px 20px;
+  text-align: center;
+  font-size: 18px;
+  color: #f0f0ea;
 }

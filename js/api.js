@@ -10,15 +10,13 @@ const getData = (renderPopups, showErrorMessage) => {
   fetch(MAIN_DIRECTORY + api.get)
     .then((response) => {
       if (!response.ok) {
-        throw new Error('Data was not retreived');
+        throw new Error('Похожие объявления не загружены');
       } else {
         return response;
       }
     })
     .then((response) => response.json())
-    .then((adverts) => {
-      renderPopups(adverts);
-    })
+    .then(renderPopups)
     .catch(showErrorMessage);
 };
 

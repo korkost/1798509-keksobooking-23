@@ -28,10 +28,12 @@ const maxLengthCheck = (input) => {
     input.value = input.value(0, input.maxLength);
   }
 };
-const showServerErrorMessage = () => {
-  const errorMessage = document.body.querySelector('.server-error');
-  errorMessage.classList.remove('hidden');
-  setTimeout(() => errorMessage.classList.add('hidden'), ERROR_MESSAGE_SHOW_TIME);
+const showServerErrorMessage = (error) => {
+  const errorElement = document.body.querySelector('.server-error');
+  const errorMessage = errorElement.querySelector('.server-error__message');
+  errorMessage.textContent = `Ошибка: ${error.message}`;
+  errorElement.classList.remove('hidden');
+  setTimeout(() => errorElement.classList.add('hidden'), ERROR_MESSAGE_SHOW_TIME);
 };
 
 const isEscPressed = (evt) => evt.key === 'Escape';

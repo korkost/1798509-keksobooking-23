@@ -1,4 +1,4 @@
-import { disableForm, activateForm, syncPriceWithType, addressInput } from './form.js';
+import { disableForm, activateForm, addressInput } from './form.js';
 import { renderTemplate } from './templete.js';
 import { getData } from './api.js';
 import { showServerErrorMessage } from './convert.js';
@@ -56,18 +56,19 @@ const createPopups = (adverts) => {
 
     marker.addTo(layer).bindPopup(renderTemplate(advert));
   });
-
-  const syncPriceWithType = ({ target }) => {
-    const latlng = target.getLatLng();
-    addressInput.value = `${latlng.lat.toFixed(DECIMAL)} ${latlng.lng.toFixed(DECIMAL)}`;
-  };
 };
+
+const changeaddressInputValue = ({ target }) => {
+  const latlng = target.getLatLng();
+  addressInput.value = `${latlng.lat.toFixed(DECIMAL)} ${latlng.lng.toFixed(DECIMAL)}`;
+};
+
 const resetMap = () => {
   mainPinMarker.setLatLng(TOKYO_CENTER);
   map.setView(TOKYO_CENTER, OFFERS);
 };
 
-disableForm();
+//disableForm();
 map.on('load', activateForm).setView(TOKYO_CENTER, OFFERS);
 
 
@@ -75,7 +76,7 @@ L.tileLayer(MAP_PROVIDER_LINK, {
   attribution: OPEN_STREET_MAP_ATTR,
 }).addTo(map);
 
-mainPinMarker.on('drag', syncPriceWithType);
+mainPinMarker.on('drag', changeaddressInputValue);
 mainPinMarker.addTo(map);
 
 getData(createPopups, showServerErrorMessage);

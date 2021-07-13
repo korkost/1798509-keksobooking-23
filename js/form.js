@@ -149,4 +149,10 @@ const activateForm = () => {
   сompleteAddressInput();
 };
 
-export { adFormReset, activateForm, disableForm, syncPriceWithType, addressInput };
+export {
+  adFormReset,
+  activateForm,
+  disableForm,
+  validatePriceInput,
+  addressInput
+};

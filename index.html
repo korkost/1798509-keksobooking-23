@@ -253,11 +253,9 @@
     </div>
   </template>
   <!-- Сообщение об ошибке получения данных с сервера -->
-  <template id="data-error">
-    <div class="data-error">
-      <p class="data-error__message">Ошибка получения данных<br>Попробуйте перезагрузить страницу</p>
-    </div>
-  </template>
+  <div class="server-error hidden">
+    <p class="server-error__message">Ошибка получения данных<br>Попробуйте перезагрузить страницу</p>
+  </div>
   <script src="leaflet/leaflet.js"></script>
   <script src="js/main.js" type="module"></script>
 </body>
