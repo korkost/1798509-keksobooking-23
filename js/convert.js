@@ -41,6 +41,43 @@ const isEscPressed = (evt) => evt.key === 'Escape';
 const removeElementItself = (element) => element.parentNode.removeChild(element);
 
 
+function debounce(callback, timeoutDelay = 500) {
+  // Используем замыкания, чтобы id таймаута у нас навсегда приклеился
+  // к возвращаемой функции с setTimeout, тогда мы его сможем перезаписывать
+  let timeoutId;
+
+  return (...rest) => {
+    // Перед каждым новым вызовом удаляем предыдущий таймаут,
+    // чтобы они не накапливались
+    clearTimeout(timeoutId);
+
+    // Затем устанавливаем новый таймаут с вызовом колбэка на ту же задержку
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+
+    // Таким образом цикл «поставить таймаут - удалить таймаут» будет выполняться,
+    // пока действие совершается чаще, чем переданная задержка timeoutDelay
+  };
+}
+
+const setFilePreview = (fileInput, imgElement, typeOptions) => {
+  fileInput.addEventListener('change', () => {
+    const file = fileInput.files[0];
+    const fileName = file.name.toLowerCase();
+
+    const isFormatValid = typeOptions.some((item) => fileName.endsWith(item));
+
+    if (isFormatValid) {
+      const reader = new FileReader();
+
+      reader.addEventListener('load', () => {
+        imgElement.src = reader.result;
+      });
+
+      reader.readAsDataURL(file);
+    }
+  });
+};
+
 export {
   isEscPressed,
   removeElementItself,
@@ -49,5 +86,7 @@ export {
   getRandomArray,
   getRandomArrayElement,
   getRandomCoordinates,
-  getRandomIntegerRange
+  getRandomIntegerRange,
+  debounce,
+  setFilePreview
 };
