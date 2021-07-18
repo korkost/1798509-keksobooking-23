@@ -41,13 +41,6 @@ const debounce = (cb, delay) => {
   };
 };
 
-
-const maxLengthCheck = (input) => {
-  if (input.value.length > input.maxLength) {
-    input.value = input.value(0, input.maxLength);
-  }
-};
-
 const setFilePreview = (fileInput, imgElement, typeOptions) => {
   fileInput.addEventListener('change', () => {
     const file = fileInput.files[0];
@@ -76,6 +69,5 @@ export {
   isEscEvent,
   isOutsideEvent,
   debounce,
-  setFilePreview,
-  maxLengthCheck
+  setFilePreview
 };

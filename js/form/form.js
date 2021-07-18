@@ -5,7 +5,7 @@ import { resetFilterForm } from '../map/filter.js';
 import { loadMarkersOnMap, returnMarkerOnDefault } from '../map/map.js';
 import { titleInput, onTitleInputValid } from './validate-title.js';
 import { roomNumberSelect, onNumberRoomsSelectChange } from './room-capacity.js';
-import { houseTypeSelect, priceInput, onPriceInputValid, onHouseTypeSelectSetPrice } from './validate-price-type.js';
+import { houseTypeSelect, onTypeElementChange } from './validate-price-type.js';
 import { сompleteAddressInput } from './validate-address.js';
 import { timeInSelect, timeOutSelect, onTimeInSelectChange, onTimeOutSelectChange } from './timein-timeout.js';
 
@@ -42,8 +42,7 @@ addImageInputEventListeners();
 
 const addFormEventListeners = () => {
   titleInput.addEventListener('input', onTitleInputValid);
-  priceInput.addEventListener('input', onPriceInputValid);
-  houseTypeSelect.addEventListener('change', onHouseTypeSelectSetPrice);
+  houseTypeSelect.addEventListener('change', onTypeElementChange);
   timeInSelect.addEventListener('change', onTimeInSelectChange);
   timeOutSelect.addEventListener('change', onTimeOutSelectChange);
   roomNumberSelect.addEventListener('change', onNumberRoomsSelectChange);
@@ -52,8 +51,7 @@ const addFormEventListeners = () => {
 
 const removeFormEventListeners = () => {
   titleInput.removeEventListener('input', onTitleInputValid);
-  priceInput.removeEventListener('input', onPriceInputValid);
-  houseTypeSelect.removeEventListener('change', onHouseTypeSelectSetPrice);
+  houseTypeSelect.removeEventListener('change', onTypeElementChange);
   timeInSelect.removeEventListener('change', onTimeInSelectChange);
   timeOutSelect.removeEventListener('change', onTimeOutSelectChange);
   roomNumberSelect.removeEventListener('change', onNumberRoomsSelectChange);
