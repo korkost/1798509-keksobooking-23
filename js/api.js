@@ -20,7 +20,7 @@ const postData = (onSuccess, onFailure, body) => {
         onFailure();
       }
     })
-    .catch(() => onFailure());
+    .catch(onFailure);
 };
 
 const fetchDataOffers = async (onSuccess, onFailure) => {
@@ -38,8 +38,8 @@ const fetchDataOffers = async (onSuccess, onFailure) => {
         onFailure();
       }
     })
-    .then((offers) => onSuccess(offers))
-    .catch(() => onFailure());
+    .then(onSuccess)
+    .catch(onFailure);
 };
 
 export { fetchDataOffers, postData };

@@ -1,7 +1,7 @@
 import { hideBlock } from '../convert.js';
 
-//const HEIGHT_PHOTO = 40;
-//const WIDHT_PHOTO = 45;
+const HEIGHT_PHOTO = 40;
+const WIDHT_PHOTO = 45;
 
 const typeCategory = {
   PALACE: 'Дворец',
@@ -15,7 +15,7 @@ const createCard = (author, offer) => {
   const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
 
   const makeFeatureItems = (featureList) => featureList.map((feature) => `<li class="popup__feature popup__feature--${feature}"></li>`).join('');
-  const makePhotoItems = (photoList) => photoList.map((photo) => `<img src="${photo}" class="popup__photo" width= "45" height="40" alt="Фотография жилья">`).join('');
+  const makePhotoItems = (photoList) => photoList.map((photo) => `<img src="${photo}" class="popup__photo" width= "${WIDHT_PHOTO}" height="${HEIGHT_PHOTO}" alt="Фотография жилья">`).join('');
 
   const card = cardTemplate.cloneNode(true);
 

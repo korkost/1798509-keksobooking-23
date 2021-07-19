@@ -12,6 +12,12 @@ const inputFeatures = [...filterForm.querySelectorAll('[type="checkbox"]')];
 const PRICE_LOW = 10000;
 const PRICE_MIDDLE = 10000;
 const PRICE_HIGH = 50000;
+const ONE_ROOM = 1;
+const TWO_ROOMS = 2;
+const THREE_ROOMS = 3;
+const ZERO_GUEST = 0;
+const ONE_GUEST = 1;
+const TWO_GUEST = 2;
 
 const HOUSING_TYPE_VALUES = {
   'any': (value) => value,
@@ -31,16 +37,16 @@ const PRICE_VALUES = {
 
 const ROOMS_VALUES = {
   'any': (value) => value,
-  '1': (value) => value === 1,
-  '2': (value) => value === 2,
-  '3': (value) => value === 3,
+  '1': (value) => value === ONE_ROOM,
+  '2': (value) => value === TWO_ROOMS,
+  '3': (value) => value === THREE_ROOMS,
 };
 
 const GUESTS_VALUES = {
   'any': (value) => value,
-  '0': (value) => value === 0,
-  '1': (value) => value === 1,
-  '2': (value) => value === 2,
+  '0': (value) => value === ZERO_GUEST,
+  '1': (value) => value === ONE_GUEST,
+  '2': (value) => value === TWO_GUEST,
 };
 
 const filterByHousingType = (sortItem) => {

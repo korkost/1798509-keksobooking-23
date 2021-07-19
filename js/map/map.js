@@ -24,10 +24,10 @@ const filterForm = document.querySelector('.map__filters');
 disableForm();
 disableFilterForm();
 
-const defaultMapSettings = {
-  coords: {
-    LAT: 35.65160,
-    LNG: 139.74908,
+const DefaultMapSettings = {
+  COORDS: {
+    lat: 35.65160,
+    lng: 139.74908,
   },
   MAP_ZOOM: 10,
   MARKER_ICON: L.icon({
@@ -39,20 +39,20 @@ const defaultMapSettings = {
 
 const defaultMarker = L.marker(
   {
-    lat: defaultMapSettings.coords.LAT,
-    lng: defaultMapSettings.coords.LNG,
+    lat: DefaultMapSettings.COORDS.lat,
+    lng: DefaultMapSettings.COORDS.lng,
   },
   {
     draggable: true,
-    icon: defaultMapSettings.MARKER_ICON,
+    icon: DefaultMapSettings.MARKER_ICON,
   },
 );
 
 const setCoordsOnInput = () => {
-  сompleteAddressInput(`${defaultMapSettings.coords.LAT}, ${defaultMapSettings.coords.LNG}`);
+  сompleteAddressInput(`${DefaultMapSettings.COORDS.lat}, ${DefaultMapSettings.COORDS.lng}`);
 
   defaultMarker.on('drag', (evt) => {
-    const { lat, lng } = evt.target.getLatLng();
+    const { lat, lng } = evt.target.getlatlng();
 
     сompleteAddressInput(`${lat.toFixed(DECIMAL)}, ${lng.toFixed(DECIMAL)}`);
   });
@@ -65,9 +65,9 @@ const map = L.map('map-canvas')
     setCoordsOnInput();
   })
   .setView({
-    lat: defaultMapSettings.coords.LAT,
-    lng: defaultMapSettings.coords.LNG,
-  }, defaultMapSettings.MAP_ZOOM);
+    lat: DefaultMapSettings.COORDS.lat,
+    lng: DefaultMapSettings.COORDS.lng,
+  }, DefaultMapSettings.MAP_ZOOM);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -135,15 +135,15 @@ const loadMarkersOnMap = () => {
 loadMarkersOnMap();
 
 const returnMarkerOnDefault = () => {
-  defaultMarker.setLatLng({
-    lat: defaultMapSettings.coords.LAT,
-    lng: defaultMapSettings.coords.LNG,
+  defaultMarker.setlatlng({
+    lat: DefaultMapSettings.COORDS.lat,
+    lng: DefaultMapSettings.COORDS.lng,
   });
 
   map.setView({
-    lat: defaultMapSettings.coords.LAT,
-    lng: defaultMapSettings.coords.LNG,
-  }, defaultMapSettings.MAP_ZOOM);
+    lat: DefaultMapSettings.COORDS.lat,
+    lng: DefaultMapSettings.COORDS.lng,
+  }, DefaultMapSettings.MAP_ZOOM);
 };
 
 export {
