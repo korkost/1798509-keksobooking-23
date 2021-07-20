@@ -26,8 +26,8 @@ const typesDictionary = {
 
 const setMinPrice = () => {
   const minPriceValue = typesDictionary[houseTypeSelect.value].price;
-  priceInput.setAttribute('placeholder', minPriceValue);
-  priceInput.setAttribute('min', minPriceValue);
+  priceInput.placeholder = minPriceValue;
+  priceInput.min = minPriceValue;
 };
 
 const onTypeElementChange = () => {

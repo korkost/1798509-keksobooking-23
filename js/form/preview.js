@@ -1,84 +1,29 @@
-const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
-const MAX_AVATAR_PHOTOS = 3;
-const MAX_ROOM_PHOTOS = 3;
-const AVATAR_IMG_WIDTH = 40;
-const AVATAR_IMG_HEIGHT = 44;
-const ROOM_IMG_WIDTH = 70;
-const ROOM_IMG_HEIGHT = 70;
+import { setFilePreview } from '../convert.js';
 
-const avatarImg = document.createElement('img');
-avatarImg.width = AVATAR_IMG_WIDTH;
-avatarImg.height = AVATAR_IMG_HEIGHT;
-avatarImg.alt = 'Аватар пользователя';
-avatarImg.src = 'img/muffin-grey.svg';
-const avatar = document.querySelector('#avatar');
-const avatarPreview = document.querySelector('.ad-form-header__preview');
+const AVATAR_FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+const PHOTO_FILE_TYPES = ['jpg', 'jpeg', 'png'];
+const DEFAULT_PREVIEW_IMAGE = 'img/muffin-grey.svg';
 
-const roomImg = document.createElement('img');
-roomImg.classList.add('ad-form__photo');
-roomImg.width = ROOM_IMG_WIDTH;
-roomImg.height = ROOM_IMG_HEIGHT;
-roomImg.alt = 'Фотография помещения';
+// Avatar
 
-const roomPhotos = document.querySelector('#images');
-const roomPhotosPreview = document.querySelector('.ad-form__photos-preview');
+const avatarInput = document.querySelector('#avatar');
+const avatarPreview = document.querySelector('.ad-form-header__preview img');
 
-const createImagePreview = (photoInput, photoPreview, maxLength, img) => {
-  photoPreview.innerHTML = '';
-  const length = Math.min(photoInput.files.length, maxLength);
-  for (let iterator = 0; iterator < length; iterator++) {
-    const file = photoInput.files[iterator];
-    const fileName = file.name.toLowerCase();
-    const imgClone = img.cloneNode(true);
+setFilePreview(avatarInput, avatarPreview, AVATAR_FILE_TYPES);
 
-    const matches = FILE_TYPES.some((imageType) => fileName.endsWith(imageType));
+// Photo
 
-    if (matches) {
-      const reader = new FileReader();
+const housePhotoInput = document.querySelector('#images');
+const housePhotoPreview = document.querySelector('.ad-form__photo img');
 
-      const onImageLoad = () => {
-        imgClone.src = reader.result;
-        photoPreview.appendChild(imgClone);
-      };
-
-      reader.addEventListener('load', onImageLoad);
-
-      reader.readAsDataURL(file);
-    }
-  }
-};
+setFilePreview(housePhotoInput, housePhotoPreview, PHOTO_FILE_TYPES);
 
 const clearFileInputs = () => {
-  roomPhotos.value = '';
-  roomPhotosPreview.innerHTML = '';
-  const plug = document.createElement('div');
-  plug.classList.add('ad-form__photo');
-  roomPhotosPreview.appendChild(plug);
+  avatarInput.value = '';
+  housePhotoInput.value = '';
 
-  avatar.value = '';
-  avatarPreview.innerHTML = '';
-  avatarPreview.appendChild(avatarImg);
+  avatarPreview.src = DEFAULT_PREVIEW_IMAGE;
+  housePhotoPreview.src = DEFAULT_PREVIEW_IMAGE;
 };
 
-const onAvatarChange = () => {
-  createImagePreview(
-    avatar,
-    avatarPreview,
-    MAX_AVATAR_PHOTOS,
-    avatarImg);
-};
-
-const onRoomPhotosChange = () => {
-  createImagePreview(
-    roomPhotos,
-    roomPhotosPreview,
-    MAX_ROOM_PHOTOS,
-    roomImg);
-};
-
-const addImageInputEventListeners = () => {
-  avatar.addEventListener('change', onAvatarChange);
-  roomPhotos.addEventListener('change', onRoomPhotosChange);
-};
-
-export { clearFileInputs, addImageInputEventListeners };
+export { clearFileInputs };

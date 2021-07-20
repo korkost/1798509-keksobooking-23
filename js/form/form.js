@@ -1,6 +1,6 @@
 import { openAlert } from '../error.js';
 import { postData } from '../api.js';
-import { clearFileInputs, addImageInputEventListeners } from './preview.js';
+import { clearFileInputs } from './preview.js';
 import { resetFilterForm } from '../map/filter.js';
 import { loadMarkersOnMap, returnMarkerOnDefault } from '../map/map.js';
 import { titleInput, onTitleInputValid } from './validate-title.js';
@@ -37,8 +37,6 @@ adForm.addEventListener('submit', (evt) => {
     new FormData(adForm),
   );
 });
-
-addImageInputEventListeners();
 
 const addFormEventListeners = () => {
   titleInput.addEventListener('input', onTitleInputValid);

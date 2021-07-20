@@ -10,7 +10,7 @@ const openAlert = (type, message) => {
 
   document.body.append(alert);
 
-  const closeAlertHandler = (evt) => {
+  const onAlertErorrCloce = (evt) => {
     if (isEscEvent(evt)) {
       alert.remove();
     }
@@ -19,12 +19,12 @@ const openAlert = (type, message) => {
       alert.remove();
     }
 
-    window.removeEventListener('click', closeAlertHandler);
-    window.removeEventListener('keydown', closeAlertHandler);
+    window.removeEventListener('click', onAlertErorrCloce);
+    window.removeEventListener('keydown', onAlertErorrCloce);
   };
 
-  window.addEventListener('click', closeAlertHandler);
-  window.addEventListener('keydown', closeAlertHandler);
+  window.addEventListener('click', onAlertErorrCloce);
+  window.addEventListener('keydown', onAlertErorrCloce);
 };
 
 export { openAlert };
