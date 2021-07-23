@@ -1,42 +1,31 @@
+import { checkMaxLength } from '../convert.js';
+
 const houseTypeSelect = document.querySelector('#type');
 const priceInput = document.querySelector('#price');
 
-const typesDictionary = {
-  bungalow: {
-    typeName: 'Бунгало',
-    price: 0,
-  },
-  flat: {
-    typeName: 'Квартира',
-    price: 1000,
-  },
-  hotel: {
-    typeName: 'Отель',
-    price: 3000,
-  },
-  house: {
-    typeName: 'Дом',
-    price: 5000,
-  },
-  palace: {
-    typeName: 'Дворец',
-    price: 10000,
-  },
+const typeCategoryPriceValue = {
+  BUNGALOW: 0,
+  FLAT: 1000,
+  HOTEL: 3000,
+  HOUSE: 5000,
+  PALACE: 10000,
 };
 
-const setMinPrice = () => {
-  const minPriceValue = typesDictionary[houseTypeSelect.value].price;
-  priceInput.placeholder = minPriceValue;
-  priceInput.min = minPriceValue;
+const onPriceInputValid = () => {
+  checkMaxLength(priceInput);
 };
 
-const onTypeElementChange = () => {
-  setMinPrice();
+const onHouseTypeSelectSetPrice = (evt) => {
+  const target = evt.target;
+
+  priceInput.min = typeCategoryPriceValue[target.value.toUpperCase()];
+  priceInput.placeholder = typeCategoryPriceValue[target.value.toUpperCase()];
 };
 
 export {
   priceInput,
   houseTypeSelect,
-  onTypeElementChange
+  onPriceInputValid,
+  onHouseTypeSelectSetPrice
 };
 

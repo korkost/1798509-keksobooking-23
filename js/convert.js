@@ -60,6 +60,12 @@ const setFilePreview = (fileInput, imgElement, typeOptions) => {
   });
 };
 
+const checkMaxLength = (input) => {
+  if (input.value.length > input.maxLength) {
+    input.value = input.value.slice(0, input.maxLength);
+  }
+};
+
 export {
   getRandomPositiveFloat,
   getRandomArrayElement,
@@ -69,5 +75,6 @@ export {
   isEscEvent,
   isOutsideEvent,
   debounce,
-  setFilePreview
+  setFilePreview,
+  checkMaxLength
 };

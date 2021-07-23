@@ -50,10 +50,8 @@ const defaultMarker = L.marker(
 
 const setCoordsOnInput = () => {
   сompleteAddressInput(`${DefaultMapSettings.COORDS.lat}, ${DefaultMapSettings.COORDS.lng}`);
-
   defaultMarker.on('drag', (evt) => {
-    const { lat, lng } = evt.target.getlatlng();
-
+    const { lat, lng } = evt.target.getLatLng();
     сompleteAddressInput(`${lat.toFixed(DECIMAL)}, ${lng.toFixed(DECIMAL)}`);
   });
 
@@ -111,7 +109,7 @@ const createMarker = (offerData) => {
 };
 
 const renderCards = (offerData) => {
-  const cardData = shuffleArray(offerData).slice(0, DEFAULT_COUNT_OF_MARKER);
+  const cardData = offerData.slice(0, DEFAULT_COUNT_OF_MARKER);
   createMarker(cardData);
 
   const applyFilter = () => {
@@ -135,21 +133,16 @@ const loadMarkersOnMap = () => {
 loadMarkersOnMap();
 
 const returnMarkerOnDefault = () => {
-  defaultMarker.setlatlng({
-    lat: DefaultMapSettings.COORDS.lat,
-    lng: DefaultMapSettings.COORDS.lng,
-  });
-
+  defaultMarker.setLatLng({ ...DefaultMapSettings.COORDS });
   map.setView({
     lat: DefaultMapSettings.COORDS.lat,
     lng: DefaultMapSettings.COORDS.lng,
   }, DefaultMapSettings.MAP_ZOOM);
 };
 
+
 export {
   returnMarkerOnDefault,
   loadMarkersOnMap,
-  renderCards,
-  createMarker,
   setCoordsOnInput
 };

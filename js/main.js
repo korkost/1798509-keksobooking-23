@@ -1,2 +1,2 @@
-import './form/preview.js';
+//import './form/preview.js';
 import './map/map.js';

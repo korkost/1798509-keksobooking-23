@@ -1,11 +1,11 @@
 import { openAlert } from '../error.js';
 import { postData } from '../api.js';
-import { clearFileInputs } from './preview.js';
+//import { clearFileInputs } from './preview.js';
 import { resetFilterForm } from '../map/filter.js';
 import { loadMarkersOnMap, returnMarkerOnDefault } from '../map/map.js';
 import { titleInput, onTitleInputValid } from './validate-title.js';
 import { roomNumberSelect, onNumberRoomsSelectChange } from './room-capacity.js';
-import { houseTypeSelect, onTypeElementChange } from './validate-price-type.js';
+import { priceInput, onPriceInputValid, houseTypeSelect, onHouseTypeSelectSetPrice } from './validate-price-type.js';
 import { сompleteAddressInput } from './validate-address.js';
 import { timeInSelect, timeOutSelect, onTimeInSelectChange, onTimeOutSelectChange } from './timein-timeout.js';
 
@@ -19,7 +19,7 @@ const onResetForms = (evt) => {
 
   adForm.reset();
   resetFilterForm();
-  clearFileInputs();
+  //clearFileInputs();
 
   returnMarkerOnDefault();
   loadMarkersOnMap();
@@ -40,7 +40,8 @@ adForm.addEventListener('submit', (evt) => {
 
 const addFormEventListeners = () => {
   titleInput.addEventListener('input', onTitleInputValid);
-  houseTypeSelect.addEventListener('change', onTypeElementChange);
+  priceInput.addEventListener('input', onPriceInputValid);
+  houseTypeSelect.addEventListener('input', onHouseTypeSelectSetPrice);
   timeInSelect.addEventListener('change', onTimeInSelectChange);
   timeOutSelect.addEventListener('change', onTimeOutSelectChange);
   roomNumberSelect.addEventListener('change', onNumberRoomsSelectChange);
@@ -49,7 +50,9 @@ const addFormEventListeners = () => {
 
 const removeFormEventListeners = () => {
   titleInput.removeEventListener('input', onTitleInputValid);
-  houseTypeSelect.removeEventListener('change', onTypeElementChange);
+  priceInput.removeEventListener('input', onPriceInputValid);
+  titleInput.removeEventListener('input', onTitleInputValid);
+  houseTypeSelect.removeEventListener('input', onHouseTypeSelectSetPrice);
   timeInSelect.removeEventListener('change', onTimeInSelectChange);
   timeOutSelect.removeEventListener('change', onTimeOutSelectChange);
   roomNumberSelect.removeEventListener('change', onNumberRoomsSelectChange);
