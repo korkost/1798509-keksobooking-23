@@ -109,7 +109,7 @@ const createMarker = (offerData) => {
 };
 
 const renderCards = (offerData) => {
-  const cardData = offerData.slice(0, DEFAULT_COUNT_OF_MARKER);
+  const cardData = shuffleArray(offerData).slice(0, DEFAULT_COUNT_OF_MARKER);
   createMarker(cardData);
 
   const applyFilter = () => {

@@ -19,6 +19,7 @@ const shuffleArray = (arr) => {
   return copyArray;
 };
 
+
 const getRandomArray = (arr) => {
   const newArray = shuffleArray(arr);
   return newArray.slice(0, getRandomNumber(1, newArray.length));

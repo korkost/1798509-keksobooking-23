@@ -31,9 +31,9 @@ adForm.addEventListener('submit', (evt) => {
   postData(
     () => {
       onResetForms();
-      openAlert('success');
+      openAlert('error', 'Ошибка размещения объявления');
     },
-    () => openAlert('error', 'Ошибка размещения объявления'),
+    () => openAlert('success'),
     new FormData(adForm),
   );
 });
