@@ -1,5 +1,3 @@
-//import { checkMaxLength } from '../convert.js';
-
 const houseTypeSelect = document.querySelector('#type');
 const priceInput = document.querySelector('#price');
 const MAX_PRICE = 1000000;
@@ -27,7 +25,7 @@ const HOUSES_TYPES = [
 ];
 
 const onPriceInputValid = function () {
-  if (+priceInput.value > MAX_PRICE) {
+  if (priceInput.value > MAX_PRICE) {
     priceInput.setCustomValidity(`Цена за ночь не должна превышать ${MAX_PRICE}`);
   } else {
     priceInput.setCustomValidity('');
@@ -45,7 +43,7 @@ const roomValueValidate = function (targetElement) {
   }
 };
 
-roomValueValidate(houseTypeSelect);
+//roomValueValidate(houseTypeSelect);
 
 const onHouseTypeSelectSetPrice = function (evt) {
   roomValueValidate(evt.target);

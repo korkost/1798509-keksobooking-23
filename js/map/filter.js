@@ -110,6 +110,7 @@ const activateFilterForm = () => {
 };
 
 export {
+  filterForm,
   activateFilterForm,
   disableFilterForm,
   resetFilterForm,

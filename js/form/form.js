@@ -51,7 +51,6 @@ const addFormEventListeners = () => {
 const removeFormEventListeners = () => {
   titleInput.removeEventListener('input', onTitleInputValid);
   priceInput.removeEventListener('input', onPriceInputValid);
-  titleInput.removeEventListener('input', onTitleInputValid);
   houseTypeSelect.removeEventListener('input', onHouseTypeSelectSetPrice);
   timeInSelect.removeEventListener('change', onTimeInSelectChange);
   timeOutSelect.removeEventListener('change', onTimeOutSelectChange);
@@ -81,4 +80,4 @@ const activateForm = () => {
   сompleteAddressInput();
 };
 
-export { activateForm, disableForm, onResetForms };
+export { adForm, activateForm, disableForm, onResetForms };

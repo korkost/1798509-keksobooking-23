@@ -1,7 +1,7 @@
 import { createCard } from './templete.js';
 import { activateForm, disableForm } from '../form/form.js';
 import { сompleteAddressInput } from '../form/validate-address.js';
-import { activateFilterForm, disableFilterForm, getFilterData } from './filter.js';
+import { activateFilterForm, disableFilterForm, getFilterData, filterForm } from './filter.js';
 import { shuffleArray } from '../convert.js';
 import { debounce } from '../convert.js';
 import { openAlert } from '../error.js';
@@ -18,8 +18,6 @@ const MAIN_ICON_HEIGHT = 52;
 const MAIN_ICON_WIDTH = 52;
 const ANCHOR_X = 26;
 const ANCHOR_Y = 52;
-
-const filterForm = document.querySelector('.map__filters');
 
 disableForm();
 disableFilterForm();
@@ -60,7 +58,7 @@ const setCoordsOnInput = () => {
 const map = L.map('map-canvas')
   .on('load', () => {
     activateForm();
-    setCoordsOnInput();
+    //setCoordsOnInput();
   })
   .setView({
     lat: DefaultMapSettings.COORDS.lat,
