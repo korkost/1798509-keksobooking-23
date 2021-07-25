@@ -111,7 +111,7 @@ const renderCards = (offerData) => {
   createMarker(cardData);
 
   const applyFilter = () => {
-    const currentFilter = getFilterData(cardData);
+    const currentFilter = getFilterData(offerData).slice(0, DEFAULT_COUNT_OF_MARKER);
     createMarker(currentFilter);
   };
 

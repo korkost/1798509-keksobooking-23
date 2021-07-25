@@ -1,29 +1,33 @@
-import { setFilePreview } from '../convert.js';
+//import { setFilePreview } from '../convert.js';
 
-const AVATAR_FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
-const PHOTO_FILE_TYPES = ['jpg', 'jpeg', 'png'];
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 const DEFAULT_PREVIEW_IMAGE = 'img/muffin-grey.svg';
-
-// Avatar
-
-const avatarInput = document.querySelector('#avatar');
+const avatarInput = document.querySelector('.ad-form-header__input');
 const avatarPreview = document.querySelector('.ad-form-header__preview img');
 
-setFilePreview(avatarInput, avatarPreview, AVATAR_FILE_TYPES);
+const onChangeFileAvatar = () => {
+  const file = avatarInput.files[0];
+  const fileName = file.name.toLowerCase();
 
-// Photo
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
 
-const housePhotoInput = document.querySelector('#images');
-const housePhotoPreview = document.querySelector('.ad-form__photo img');
+  if (matches) {
+    const reader = new FileReader();
 
-setFilePreview(housePhotoInput, housePhotoPreview, PHOTO_FILE_TYPES);
+    const onChangeFile = () => {
+      avatarPreview.src = reader.result;
+    };
 
-const clearFileInputs = () => {
-  avatarInput.value = '';
-  housePhotoInput.value = '';
+    reader.addEventListener('load', onChangeFile);
 
-  avatarPreview.src = DEFAULT_PREVIEW_IMAGE;
-  housePhotoPreview.src = DEFAULT_PREVIEW_IMAGE;
+    reader.readAsDataURL(file);
+  }
 };
 
-export { clearFileInputs };
+const clearFileFoto = () => {
+  avatarInput.value = '';
+  avatarPreview.src = DEFAULT_PREVIEW_IMAGE;
+
+};
+
+export { clearFileFoto, onChangeFileAvatar, avatarInput };

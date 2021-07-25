@@ -43,13 +43,18 @@ const roomValueValidate = function (targetElement) {
   }
 };
 
-//roomValueValidate(houseTypeSelect);
+roomValueValidate(priceInput);
+
+const clearFileInputs = () => {
+  priceInput.placeholder = HOUSES_TYPES[0].price;
+};
 
 const onHouseTypeSelectSetPrice = function (evt) {
   roomValueValidate(evt.target);
 };
 
 export {
+  clearFileInputs,
   priceInput,
   houseTypeSelect,
   onPriceInputValid,
