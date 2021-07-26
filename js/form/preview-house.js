@@ -1,5 +1,3 @@
-//import { setFilePreview } from '../convert.js';
-
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 const PHOTO_WIDTH = 70;
 const PHOTO_HEIGHT = 70;
@@ -32,7 +30,7 @@ const onChangefileOffer = () => {
 
 
 const clearFileHousePhoto = () => {
-  housePhotoInput.value = '';
+  photo.parentNode.removeChild(photo);
 };
 
 export { clearFileHousePhoto, housePhotoInput, onChangefileOffer };

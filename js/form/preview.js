@@ -1,5 +1,3 @@
-//import { setFilePreview } from '../convert.js';
-
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 const DEFAULT_PREVIEW_IMAGE = 'img/muffin-grey.svg';
 const avatarInput = document.querySelector('.ad-form-header__input');
