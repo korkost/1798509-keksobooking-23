@@ -42,8 +42,6 @@ const debounce = (cb, delay) => {
   };
 };
 
-
-
 export {
   getRandomPositiveFloat,
   getRandomArrayElement,
