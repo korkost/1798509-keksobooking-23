@@ -58,7 +58,7 @@ const setCoordsOnInput = () => {
 const map = L.map('map-canvas')
   .on('load', () => {
     activateForm();
-    //setCoordsOnInput();
+    setCoordsOnInput();
   })
   .setView({
     lat: DefaultMapSettings.COORDS.lat,
