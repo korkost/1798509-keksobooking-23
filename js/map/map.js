@@ -1,7 +1,7 @@
 import { createCard } from './templete.js';
 import { activateForm, disableForm } from '../form/form.js';
 import { сompleteAddressInput } from '../form/validate-address.js';
-import { activateFilterForm, disableFilterForm, getFilterData } from './filter.js';
+import { activateFilterForm, disableFilterForm, getFilterData, filterForm } from './filter.js';
 import { shuffleArray } from '../convert.js';
 import { debounce } from '../convert.js';
 import { openAlert } from '../error.js';
@@ -18,8 +18,6 @@ const MAIN_ICON_HEIGHT = 52;
 const MAIN_ICON_WIDTH = 52;
 const ANCHOR_X = 26;
 const ANCHOR_Y = 52;
-
-const filterForm = document.querySelector('.map__filters');
 
 disableForm();
 disableFilterForm();
@@ -50,10 +48,8 @@ const defaultMarker = L.marker(
 
 const setCoordsOnInput = () => {
   сompleteAddressInput(`${DefaultMapSettings.COORDS.lat}, ${DefaultMapSettings.COORDS.lng}`);
-
   defaultMarker.on('drag', (evt) => {
-    const { lat, lng } = evt.target.getlatlng();
-
+    const { lat, lng } = evt.target.getLatLng();
     сompleteAddressInput(`${lat.toFixed(DECIMAL)}, ${lng.toFixed(DECIMAL)}`);
   });
 
@@ -62,7 +58,7 @@ const setCoordsOnInput = () => {
 const map = L.map('map-canvas')
   .on('load', () => {
     activateForm();
-    setCoordsOnInput();
+    //setCoordsOnInput();
   })
   .setView({
     lat: DefaultMapSettings.COORDS.lat,
@@ -115,7 +111,7 @@ const renderCards = (offerData) => {
   createMarker(cardData);
 
   const applyFilter = () => {
-    const currentFilter = getFilterData(cardData);
+  const currentFilter = getFilterData(offerData).slice(0, DEFAULT_COUNT_OF_MARKER);
     createMarker(currentFilter);
   };
 
@@ -135,21 +131,16 @@ const loadMarkersOnMap = () => {
 loadMarkersOnMap();
 
 const returnMarkerOnDefault = () => {
-  defaultMarker.setlatlng({
-    lat: DefaultMapSettings.COORDS.lat,
-    lng: DefaultMapSettings.COORDS.lng,
-  });
-
+  defaultMarker.setLatLng({ ...DefaultMapSettings.COORDS });
   map.setView({
     lat: DefaultMapSettings.COORDS.lat,
     lng: DefaultMapSettings.COORDS.lng,
   }, DefaultMapSettings.MAP_ZOOM);
 };
 
+
 export {
   returnMarkerOnDefault,
   loadMarkersOnMap,
-  renderCards,
-  createMarker,
   setCoordsOnInput
 };

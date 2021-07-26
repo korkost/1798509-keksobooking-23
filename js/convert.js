@@ -19,6 +19,7 @@ const shuffleArray = (arr) => {
   return copyArray;
 };
 
+
 const getRandomArray = (arr) => {
   const newArray = shuffleArray(arr);
   return newArray.slice(0, getRandomNumber(1, newArray.length));
@@ -41,24 +42,7 @@ const debounce = (cb, delay) => {
   };
 };
 
-const setFilePreview = (fileInput, imgElement, typeOptions) => {
-  fileInput.addEventListener('change', () => {
-    const file = fileInput.files[0];
-    const fileName = file.name.toLowerCase();
 
-    const isFormatValid = typeOptions.some((item) => fileName.endsWith(item));
-
-    if (isFormatValid) {
-      const reader = new FileReader();
-
-      reader.addEventListener('load', () => {
-        imgElement.src = reader.result;
-      });
-
-      reader.readAsDataURL(file);
-    }
-  });
-};
 
 export {
   getRandomPositiveFloat,
@@ -68,6 +52,5 @@ export {
   hideBlock,
   isEscEvent,
   isOutsideEvent,
-  debounce,
-  setFilePreview
+  debounce
 };
