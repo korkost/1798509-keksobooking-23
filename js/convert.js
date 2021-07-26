@@ -42,30 +42,7 @@ const debounce = (cb, delay) => {
   };
 };
 
-const setFilePreview = (fileInput, imgElement, typeOptions) => {
-  fileInput.addEventListener('change', () => {
-    const file = fileInput.files[0];
-    const fileName = file.name.toLowerCase();
 
-    const isFormatValid = typeOptions.some((item) => fileName.endsWith(item));
-
-    if (isFormatValid) {
-      const reader = new FileReader();
-
-      reader.addEventListener('load', () => {
-        imgElement.src = reader.result;
-      });
-
-      reader.readAsDataURL(file);
-    }
-  });
-};
-
-const checkMaxLength = (input) => {
-  if (input.value.length > input.maxLength) {
-    input.value = input.value.slice(0, input.maxLength);
-  }
-};
 
 export {
   getRandomPositiveFloat,
@@ -75,7 +52,5 @@ export {
   hideBlock,
   isEscEvent,
   isOutsideEvent,
-  debounce,
-  setFilePreview,
-  checkMaxLength
+  debounce
 };
