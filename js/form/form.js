@@ -1,7 +1,5 @@
 import { openAlert } from '../error.js';
 import { postData } from '../api.js';
-import { clearFileFoto, onChangeFileAvatar, avatarInput } from './preview.js';
-import { clearFileHousePhoto, housePhotoInput, onChangefileOffer } from './preview-house.js';
 import { resetFilterForm } from '../map/filter.js';
 import { loadMarkersOnMap, returnMarkerOnDefault } from '../map/map.js';
 import { titleInput, onTitleInputValid } from './validate-title.js';
@@ -21,8 +19,6 @@ const onResetForms = (evt) => {
   adForm.reset();
   resetFilterForm();
   clearFileInputs();
-  clearFileHousePhoto();
-  clearFileFoto();
   returnMarkerOnDefault();
   loadMarkersOnMap();
 };
@@ -41,8 +37,6 @@ adForm.addEventListener('submit', (evt) => {
 });
 
 const addFormEventListeners = () => {
-  avatarInput.addEventListener('change', onChangeFileAvatar);
-  housePhotoInput.addEventListener('change', onChangefileOffer);
   titleInput.addEventListener('input', onTitleInputValid);
   priceInput.addEventListener('input', onPriceInputValid);
   houseTypeSelect.addEventListener('input', onHouseTypeSelectSetPrice);
