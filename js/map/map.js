@@ -111,9 +111,9 @@ const renderCards = (offerData) => {
   createMarker(cardData);
 
   const applyFilter = () => {
-  const currentFilter = getFilterData(offerData).slice(0, DEFAULT_COUNT_OF_MARKER);
+    const currentFilter = getFilterData(offerData).slice(0, DEFAULT_COUNT_OF_MARKER);
     createMarker(currentFilter);
-  };
+   };
 
   filterForm.addEventListener('change', debounce(applyFilter, RERENDER_DELAY));
 };
