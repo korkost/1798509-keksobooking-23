@@ -18,6 +18,8 @@ const MAIN_ICON_HEIGHT = 52;
 const MAIN_ICON_WIDTH = 52;
 const ANCHOR_X = 26;
 const ANCHOR_Y = 52;
+const POPUP_ICON_LINK = 'img/pin.svg';
+const MAIN_ICON_LINK = 'img/main-pin.svg';
 
 disableForm();
 disableFilterForm();
@@ -29,7 +31,7 @@ const DefaultMapSettings = {
   },
   MAP_ZOOM: 10,
   MARKER_ICON: L.icon({
-    iconUrl: 'img/main-pin.svg',
+    iconUrl: MAIN_ICON_LINK,
     iconSize: [MAIN_ICON_HEIGHT, MAIN_ICON_WIDTH],
     iconAnchor: [ANCHOR_X, ANCHOR_Y],
   }),
@@ -81,7 +83,7 @@ const createMarker = (offerData) => {
   offerData.forEach(({ author, offer, location }) => {
     const { lat, lng } = location;
     const markerIcon = L.icon({
-      iconUrl: 'img/pin.svg',
+      iconUrl: POPUP_ICON_LINK,
       iconSize: [MARKER_ICON_WIDTH, MARKER_ICON_HEIGHT],
       iconAnchor: [MARKER_ICON_ANCHOR_X, MARKER_ICON_ANCHOR_Y],
     });
